@@ -1,0 +1,12 @@
+#ifndef KCFTRACKER_GLOBAL_H
+#define KCFTRACKER_GLOBAL_H
+
+//#include <QtCore/qglobal.h>
+
+#if defined(KCFTRACKER_LIBRARY)
+#  define KCFTRACKERSHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define KCFTRACKERSHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // KCFTRACKER_GLOBAL_H
