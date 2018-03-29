@@ -2,7 +2,8 @@
 #define MAINUI_H
 
 #include <QDialog>
-
+#include"globalsettings.h"
+#include"managerofcommunicaion.h"
 namespace Ui {
 class MainUI;
 }
@@ -17,6 +18,14 @@ public:
 
 private:
     Ui::MainUI *ui;
+    bool isWorking;
+    QPushButton* btn_StartOrStop;
+
+public slots:
+    void startorstopWorking();
+private:
+    GlobalSettings* pSettings;
+    ManagerOfCommunicaion* pComManager;
 };
 
 #endif // MAINUI_H

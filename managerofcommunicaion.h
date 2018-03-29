@@ -2,8 +2,9 @@
 #define MANAGEROFCOMMUNICAION_H
 
 #include <QObject>
-#include "serviceudpvideo.h"
 #include <QThread>
+#include "serialPortService/serviceserialfirectrl.h"
+#include "serialPortService/serviceserialpayload.h"
 
 
 class ManagerOfCommunicaion : public QObject
@@ -27,6 +28,8 @@ signals:
 public slots:
 
 private:
+    ServiceSerialPayload*   pSerialServicePayload;
+    ServiceSerialFireCtrl*  pSerialServiceFireCtrl;
 
 
 };

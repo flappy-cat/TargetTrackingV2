@@ -29,7 +29,8 @@ SOURCES += main.cpp\
     videoProcService/videoencodeh264.cpp \
     videoProcService/videoprocess.cpp \
     comutils.cpp \
-    serialcomsetting.cpp
+    serialcomsetting.cpp \
+    managerofcommunicaion.cpp
 
 HEADERS  += mainui.h \
     globalsettings.h \
@@ -52,7 +53,6 @@ HEADERS  += mainui.h \
     serialPortService/serialportboost.h \
     serialPortService/serviceserialfirectrl.h \
     serialPortService/serviceserialpayload.h \
-    udpService/managerofcommunicaion.h \
     udpService/serviceudpvideo.h \
     udpService/udpsendservice.h \
     videoProcService/servicevideoproc.h \
@@ -60,6 +60,7 @@ HEADERS  += mainui.h \
     videoProcService/videoencodeh264.h \
     videoProcService/videoprocess.h \
     comutils.h \
-    serialcomsetting.h
+    serialcomsetting.h \
+    managerofcommunicaion.h
 
 FORMS    += mainui.ui
