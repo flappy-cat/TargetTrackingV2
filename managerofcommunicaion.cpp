@@ -2,7 +2,7 @@
 
 ManagerOfCommunicaion::ManagerOfCommunicaion(QObject *parent) : QObject(parent)
 {
-
+    connect (this,SIGNAL(Send_Data_signal(QByteArray)),pSerialServicePayload,SLOT(Send_Data(QByteArray)));
 }
 
 ManagerOfCommunicaion::~ManagerOfCommunicaion ()
@@ -33,4 +33,19 @@ void ManagerOfCommunicaion::StartCommunication()
     pSerialServiceFireCtrl->StartService ();
     pSerialServicePayload->StartService ();
 
+}
+
+void ManagerOfCommunicaion::StopCommunication()
+{
+
+}
+
+void ManagerOfCommunicaion::DeinitCommunication()
+{
+
+}
+
+void ManagerOfCommunicaion::SerialPayloadSend(QByteArray bufArray)
+{
+    emit Send_Data_signal (bufArray);
 }

@@ -1,8 +1,8 @@
 #include "dataparser4payload.h"
 #include "globalsettings.h"
-#include "udpsendservice.h"
+#include "udpService/udpsendservice.h"
 #include "datamanager.h"
-
+#include "comutils.h"
 DataParser4Payload::DataParser4Payload()
 {
     dataBuffer.resize (1024);
@@ -89,7 +89,7 @@ bool DataParser4Payload::ParseDownData(QByteArray& bufData)
 
 bool DataParser4Payload::CheckFramePayload (QByteArray& bufData)
 {
-    quint16 crcResult = GlobalSettings::CRC_check (bufData.mid (2, bufData.length ()-4));
+    quint16 crcResult = FuncUtils::CRC_check (bufData.mid (2, bufData.length ()-4));
     quint16 tmp = bufData[bufData.length ()-2]<<8 | bufData[bufData.length ()-1];
 
     if(crcResult == tmp)
@@ -108,7 +108,7 @@ void DataParser4Payload::ParseFramePayload (QByteArray& bufData)
     //Data chain : Payload (Origin)--> Jetson(PASSBY) --> ADT ......>GDT-->GCS(Receiver)
     //Prot EB 90 23 ...
 
-    GlobalSettings *pGlobalSetting = GlobalSettings::getInstance ();
+    GlobalSettings *pGlobalSetting = GlobalSettings::GetInstance ();
 
     if(bufData[2] == 0x23)//
     {

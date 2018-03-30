@@ -1,9 +1,9 @@
 #ifndef COMUTILS
 #define COMUTILS
-
+#include<QtCore>
 class FuncUtils {
-
-static quint16 GlobalSettings::CRC_check(QByteArray bufData);
+public:
+    static quint16 CRC_check(QByteArray bufData);
 
 };
 #endif // COMUTILS

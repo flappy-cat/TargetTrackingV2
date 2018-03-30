@@ -1,6 +1,7 @@
 #include "dataparser4firectrl.h"
 #include "globalsettings.h"
 #include "datamanager.h"
+#include"comutils.h"
 #include<QDebug>
 DataParser4FireCtrl::DataParser4FireCtrl()
 {
@@ -87,7 +88,7 @@ bool DataParser4FireCtrl::ParseDownData (QByteArray& bufData)
 
 bool DataParser4FireCtrl::CheckFrameFireCtrl (QByteArray& bufData)
 {
-    quint16 crcResult = GlobalSettings::CRC_check (bufData.mid (2, bufData.length ()-4));
+    quint16 crcResult = FuncUtils::CRC_check (bufData.mid (2, bufData.length ()-4));
     quint16 tmp = bufData[bufData.length ()-2]<<8 | bufData[bufData.length ()-1];
 
     if(crcResult == tmp)

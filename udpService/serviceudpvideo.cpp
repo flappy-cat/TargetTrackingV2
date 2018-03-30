@@ -1,17 +1,18 @@
 #include "serviceudpvideo.h"
 #include "globalsettings.h"
 #include "datamanager.h"
-#include "serviceserialpayload.h"
+
+#include"serialPortService/serviceserialpayload.h"
+#include"videoProcService/servicevideoproc.h"
 #include <vector>
 using namespace std;
 #include <QDebug>
-#include "servicevideoproc.h"
-
+#include"comutils.h"
 
 ServiceUDPVideo::ServiceUDPVideo(QObject *parent) : QObject(parent)
 {
     m_pUDPSocket_Video = new QUdpSocket(this);
-    GlobalSettings *pInstance = GlobalSettings::getInstance ();
+    GlobalSettings *pInstance = GlobalSettings::GetInstance ();
     m_pUDPSocket_Video->bind (QHostAddress(pInstance->m_str_LocalAddr_IP),pInstance->m_uint_LocalAddr_Port,QUdpSocket::ShareAddress);
     qDebug()<<"UDP bind Param: IP="<<pInstance->m_str_LocalAddr_IP<<",port="<<pInstance->m_uint_LocalAddr_Port;
     connect (m_pUDPSocket_Video,SIGNAL(readyRead()),this,SLOT(Parse_ReceivedData()));
@@ -130,7 +131,7 @@ bool ServiceUDPVideo::ParseGndRecvData (unsigned char* bufData, int dataLen)
 
 bool ServiceUDPVideo::CheckDataFrame (QByteArray& bufData)
 {
-    quint16 crcResult = GlobalSettings::CRC_check(bufData.mid(2, bufData.length ()-4));
+    quint16 crcResult = FuncUtils::CRC_check(bufData.mid(2, bufData.length ()-4));
     quint16 tmp = bufData[bufData.length ()-2]<<8 | bufData[bufData.length () - 1];
 
     if(crcResult == tmp)

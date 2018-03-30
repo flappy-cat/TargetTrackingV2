@@ -16,7 +16,7 @@ extern "C"
 #include "opencv2/core/core.hpp"
 using namespace cv;
 
-#include "udpsendservice.h"
+#include"udpService/udpsendservice.h"
 #include <QHostAddress>
 
 #include <QObject>

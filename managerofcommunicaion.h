@@ -24,9 +24,10 @@ public:
     void StopCommunication();
     void DeinitCommunication();
 signals:
+    void Send_Data_signal(QByteArray bufArray);
 
 public slots:
-
+     void SerialPayloadSend(QByteArray bufArray);
 private:
     ServiceSerialPayload*   pSerialServicePayload;
     ServiceSerialFireCtrl*  pSerialServiceFireCtrl;

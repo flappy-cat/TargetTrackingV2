@@ -2,7 +2,7 @@
 #include "globalsettings.h"
 #include <QDebug>
 #include "datamanager.h"
-
+#include"comutils.h"
 
 
 ServiceSerialPayload::ServiceSerialPayload(QObject *parent) : QObject(parent)
@@ -30,7 +30,7 @@ ServiceSerialPayload* ServiceSerialPayload::getInstance ()
 
 bool ServiceSerialPayload::StartService()
 {
-    GlobalSettings *pGlobalSettings = GlobalSettings::getInstance ();
+    GlobalSettings *pGlobalSettings = GlobalSettings::GetInstance ();
 
     if(!m_bIsServiceStart)
     {
@@ -127,7 +127,7 @@ void ServiceSerialPayload::SendData()
 
 
 
-    quint16 crcRes = GlobalSettings::CRC_check(bufSend.mid (2, bufSend.length () - 4));
+    quint16 crcRes = FuncUtils::CRC_check(bufSend.mid (2, bufSend.length () - 4));
     bufSend[22] = crcRes >> 8;
     bufSend[23] = crcRes;
 

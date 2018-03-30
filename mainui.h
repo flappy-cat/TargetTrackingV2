@@ -4,6 +4,8 @@
 #include <QDialog>
 #include"globalsettings.h"
 #include"managerofcommunicaion.h"
+#include "videoProcService/videoencodeh264.h"
+#include"udpService/serviceudpvideo.h"
 namespace Ui {
 class MainUI;
 }
@@ -24,8 +26,10 @@ private:
 public slots:
     void startorstopWorking();
 private:
-    GlobalSettings* pSettings;
-    ManagerOfCommunicaion* pComManager;
+    ServiceUDPVideo         udpThread;
+    VideoEncodeH264         encThread;
+    GlobalSettings*         pSettings;
+    ManagerOfCommunicaion*  pComManager;
 };
 
 #endif // MAINUI_H

@@ -1,8 +1,8 @@
 #include "trackalgorithm.h"
 
-#include "recti.h"
-#include "cvfeatureextractmatch.h"
-#include "kcftracker.h"
+#include"algorithm/include/recti.h"
+#include "algorithm/include/cvfeatureextractmatch.h"
+#include "algorithm/include/kcftracker.h"
 #include <QDebug>
 
 bool HOG = true;

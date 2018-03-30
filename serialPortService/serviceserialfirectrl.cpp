@@ -2,7 +2,7 @@
 #include "globalsettings.h"
 #include <QDebug>
 #include "datamanager.h"
-
+#include"comutils.h"
 ServiceSerialFireCtrl::ServiceSerialFireCtrl(QObject *parent) : QObject(parent)
 {
     m_bIsServiceStart = false;
@@ -30,7 +30,7 @@ ServiceSerialFireCtrl* ServiceSerialFireCtrl::getInstance ()
 //Start service for fireControl ..
 bool ServiceSerialFireCtrl::StartService()
 {
-    GlobalSettings *pGlobalSettings = GlobalSettings::getInstance ();
+    GlobalSettings *pGlobalSettings = GlobalSettings::GetInstance ();
 
     if(!m_bIsServiceStart)
     {
@@ -130,7 +130,7 @@ void ServiceSerialFireCtrl::SendData()
     bufSend[34] = *p;
 
 
-    quint16 crcRes = GlobalSettings::CRC_check(bufSend.mid(2, bufSend.length () - 4));
+    quint16 crcRes = FuncUtils::CRC_check(bufSend.mid(2, bufSend.length () - 4));
     bufSend[35] = crcRes >> 8;
     bufSend[36] = crcRes;
 

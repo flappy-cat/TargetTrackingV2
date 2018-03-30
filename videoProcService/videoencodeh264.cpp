@@ -4,7 +4,7 @@
 #include "globalsettings.h"
 #include "datamanager.h"
 #include "log4cat.h"
-
+#include"comutils.h"
 
 VideoEncodeH264::VideoEncodeH264(QObject* parent):QThread(parent)
 {
@@ -42,7 +42,7 @@ void VideoEncodeH264::run()
 
 void VideoEncodeH264::StartEncodeLoop ()
 {
-    GlobalSettings *pGlobalSetting = GlobalSettings::getInstance ();
+    GlobalSettings *pGlobalSetting = GlobalSettings::GetInstance ();
     DataManager *pDataManager = DataManager::GetInstance ();
 
     while(1)
@@ -143,15 +143,6 @@ void VideoEncodeH264::StartEncodeLoop ()
 
             cap >> capFrame;
 
-            //if(filenum%50 == 0)
-                //imwrite (String(ss),capFrame);
-//if(filenum%30==0){
-            //imshow("ssss",capFrame);
-           // waitKey (1);
-
-//            usleep(30000);
-//}
-            //execute the tracking algorithm
             if(pDataManager->bIsStartTracking == true)
             {
                 if(pDataManager->bIsResetTracking == true)
@@ -187,26 +178,6 @@ void VideoEncodeH264::StartEncodeLoop ()
 
                     Rect resultRect = trackAlgorithm.KeepTrack (capFrame);
                     rectangle (capFrame, resultRect, Scalar(255,0, 0, 0), 2, 8, 0);
-
-
-                    {
-                        static Scalar colorTargetTag(250,250,250);
-//                        int x = resultRect.width/2;
-//                        int y = resultRect.height/2;
-
-                        //line(capFrame,Point(resultRect.x-40,y-20) , Point(x-40,y-40) ,colorTargetTag , 2 ,8 ,0);
-//                        line(capFrame,Point(x-40,y-40) , Point(x-20,y-40) ,colorTargetTag , 2 ,8 ,0);
-
-//                        line(capFrame,Point(x+20,y-40) , Point(x+40,y-40) ,colorTargetTag , 2 ,8 ,0);
-//                        line(capFrame,Point(x+40,y-40) , Point(x+40,y-20) ,colorTargetTag , 2 ,8 ,0);
-
-//                        line(capFrame,Point(x+40,y+20) , Point(x+40,y+40) ,colorTargetTag , 2 ,8 ,0);
-//                        line(capFrame,Point(x+40,y+40) , Point(x+20,y+40) ,colorTargetTag , 2 ,8 ,0);
-
-//                        line(capFrame,Point(x-20,y+40) , Point(x-40,y+40) ,colorTargetTag , 2 ,8 ,0);
-//                        line(capFrame,Point(x-40,y+40) , Point(x-40,y+20) ,colorTargetTag , 2 ,8 ,0);
-                    }
-
 
                     Point pointIn = Point(resultRect.x+resultRect.width/2,
                                           resultRect.y+resultRect.height/2);
@@ -304,12 +275,7 @@ void VideoEncodeH264::StartEncodeLoop ()
             pFrame->pts = capFrameCnt;
 
             ret = avcodec_encode_video2(pCodecCtx, &pkt, pFrame, &got_output); // 1ms
-            if (ret < 0)
-            {
-               // printf("Error encoding frame\n");
-                EASYLOG("Error encoding frame");
-                return;
-            }
+            if (ret < 0) return;
             if (got_output)
             {
     //            qDebug()<<"size:"<<pkt.size<<"\n";

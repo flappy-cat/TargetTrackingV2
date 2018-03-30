@@ -4,7 +4,7 @@
 #include <QThread>
 #include <QMutex>
 #include <QMutexLocker>
-#include <videoencodeh264.h>
+#include"videoProcService/videoencodeh264.h"
 
 
 

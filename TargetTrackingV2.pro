@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -18,10 +18,8 @@ SOURCES += main.cpp\
     serialPortService/dataparser4firectrl.cpp \
     serialPortService/dataparser4payload.cpp \
     serialPortService/dataparserbase.cpp \
-    serialPortService/serialportboost.cpp \
     serialPortService/serviceserialfirectrl.cpp \
     serialPortService/serviceserialpayload.cpp \
-    udpService/managerofcommunicaion.cpp \
     udpService/serviceudpvideo.cpp \
     udpService/udpsendservice.cpp \
     videoProcService/servicevideoproc.cpp \
@@ -30,7 +28,8 @@ SOURCES += main.cpp\
     videoProcService/videoprocess.cpp \
     comutils.cpp \
     serialcomsetting.cpp \
-    managerofcommunicaion.cpp
+    managerofcommunicaion.cpp \
+    datamanager.cpp
 
 HEADERS  += mainui.h \
     globalsettings.h \
@@ -50,7 +49,6 @@ HEADERS  += mainui.h \
     serialPortService/dataparser4firectrl.h \
     serialPortService/dataparser4payload.h \
     serialPortService/dataparserbase.h \
-    serialPortService/serialportboost.h \
     serialPortService/serviceserialfirectrl.h \
     serialPortService/serviceserialpayload.h \
     udpService/serviceudpvideo.h \
@@ -61,6 +59,18 @@ HEADERS  += mainui.h \
     videoProcService/videoprocess.h \
     comutils.h \
     serialcomsetting.h \
-    managerofcommunicaion.h
+    managerofcommunicaion.h \
+    datamanager.h
 
 FORMS    += mainui.ui
+INCLUDEPATH += /usr/local/include/opencv310 /usr/local/include/ffmpeg \
+                /usr/include/log4cplus
+LIBS += -L/usr/local/lib/opencv310 -lopencv_core -lopencv_imgproc   -lopencv_videoio \
+    -lopencv_highgui  -lopencv_video  -lopencv_features2d -lopencv_calib3d  -lopencv_imgcodecs \
+    -lopencv_shape -lopencv_cudaobjdetect -lopencv_cudawarping -lopencv_cudaimgproc
+LIBS += -L/usr/local/lib -lavcodec-ffmpeg -lavutil-ffmpeg
+LIBS += -L../algorithm/lib -lcvFeatureExtractMatch -lKCFTracker -lCalibrateInformationMeasure
+LIBS += -L/usr/lib/aarch64-linux-gnu/ -llog4cplus
+
+OBJECTS_DIR += ./temp
+MOC_DIR += ./temp

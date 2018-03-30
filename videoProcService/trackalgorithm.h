@@ -8,8 +8,8 @@
 #include "opencv2/core/core.hpp"
 using namespace cv;
 
-#include <calibrateinformationmeasure_global.h>
-#include <calibrateinformationmeasure.h>
+#include"algorithm/include/calibrateinformationmeasure_global.h"
+#include "algorithm/include/calibrateinformationmeasure.h"
 
 
 class TrackAlgorithm

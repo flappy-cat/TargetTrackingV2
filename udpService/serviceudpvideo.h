@@ -3,21 +3,8 @@
 
 #include <QObject>
 #include <QtNetwork/QUdpSocket>
-#include "serviceserialpayload.h"
+#include"serialPortService/serviceserialpayload.h"
 #include <QThread>
-//接收的数据帧类型
-//typedef enum _GND_RECV_Frame_Type
-//{
-//    FRAME_DEFAULT = 0,//缺省值
-//    FRAME_TARGET_RECTANGLE = 1,//目标矩形框
-//    FRAME_TARGET_FEATURE = 2,//目标特征数据
-//    FRAME_CAMERA_CONTROL = 3,//相机控制指令
-//    FRAME_POD_CONTROL = 4,//吊舱控制
-//    FRAME_TRACKING_SWITCH = 5,//跟踪开启/关闭指令
-//    FRAME_ASSIST_FLAG = 6,//辅助标记
-//    FRAME_VIDEO_CHANGE = 7//视频切换
-//}EnumGndRecvFrameType;
-
 typedef enum _GND_RECV_Frame_Type
 {
     FRAME_DEFAULT = 0,//default value
